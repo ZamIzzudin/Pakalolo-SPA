@@ -1120,3 +1120,18 @@ option{
     border: none;
     border-bottom: 1px solid var(--textSecondary);
 }
+
+
+/* Loader */
+.container-loader{
+    background-color: var(--cream);
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+}
+
+.loader-text{
+    font-family: var(--fontPrimary);
+    color: var(--textPrimary);
+    font-size: 1.3em;
+}

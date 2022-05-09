@@ -3,6 +3,7 @@ import { Container, Carousel, Row,Col, Card, Button, Image } from 'react-bootstr
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Loader from '../components/Loader'
 
 const recieveState = (state) => {
     return {
@@ -99,8 +100,9 @@ class Home extends Component {
 
     render(){
         return(
-            <Container className="pt-5 centered">
+            <>
                 {this.state.banner.length > 0 ? (
+                <Container className="pt-5 centered">
                     <Carousel variant="dark">
                         <Carousel.Item>
                             <Row>
@@ -141,96 +143,97 @@ class Home extends Component {
                             </Row>
                         </Carousel.Item>
                     </Carousel>
+                    <Row className="my-5 pt-5">
+                            <h1 className="home-header">Featured Products</h1>
+                    </Row>
+                    <Row xs={2} md={4} className="g-4 card-container mb-3">
+                            {this.state.featured_product.map((e, key) => (
+                                <Col key={key}>
+                                    <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
+                                        <Card.Img variant="top" alt={e.nama} src={e.thumbnail} />
+                                        <Card.Body>
+                                            <Card.Title className="card-title">{e.nama}</Card.Title>
+                                            <Card.Text className="card-price">Rp. {e.harga} ,-</Card.Text>
+                                            <Card.Text className="card-rate">{e.rate > 0 ? (e.rate) : ("Unrated")}</Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+                    </Row>
+                    <Row className="my-5 pt-5">
+                            <h1 className="home-header">Leatest Products</h1>
+                    </Row>
+                    <Row xs={1} md={3} className="g-4 card-container mb-3">
+                            {this.state.latest_product.map((e, key) => (
+                                <Col key={key}>
+                                    <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
+                                        <Card.Img variant="top" alt={e.nama} src={e.thumbnail} />
+                                        <Card.Body>
+                                            <Row>
+                                                <Col md={8}><Card.Title className="card-title">{e.nama}</Card.Title></Col>
+                                                <Col md={4}><Card.Text className="card-price">Rp. {e.harga} ,-</Card.Text></Col>
+                                            </Row>
+                                            <Card.Text className="card-rate">{e.rate > 0 ? (e.rate) : ("Unrated")}</Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+                    </Row>
+                    <Row className="my-3 pt-5">
+                            <h1 className="home-header">What Pakalolo Offer!</h1>
+                    </Row>
+                    <Row>
+                            <Col md={3} className="centered offer-card">
+                                <span className="material-symbols-outlined offer-card-icon mb-3">
+                                    local_shipping
+                                </span>
+                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
+                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
+                            </Col>
+                            <Col md={3} className="centered offer-card">
+                                <span className="material-symbols-outlined offer-card-icon mb-3">
+                                    local_shipping
+                                </span>
+                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
+                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
+                            </Col>
+                            <Col md={3} className="centered offer-card">
+                                <span className="material-symbols-outlined offer-card-icon mb-3">
+                                    local_shipping
+                                </span>
+                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
+                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
+                            </Col>
+                            <Col md={3} className="centered offer-card">
+                                <span className="material-symbols-outlined offer-card-icon mb-3">
+                                    local_shipping
+                                </span>
+                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
+                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
+                            </Col>
+                    </Row>
+                    <Row className="my-5 pt-5">
+                            <h1 className="home-header">Trending Product</h1>
+                    </Row>
+                    <Row xs={2} md={4} className="g-4 card-container">
+                            {this.state.popular_product.map((e, key) => (
+                                <Col key={key}>
+                                    <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
+                                        <Card.Img variant="top" alt={e.nama} src={e.thumbnail} />
+                                        <Card.Body>
+                                            <Card.Title className="card-title">{e.nama}</Card.Title>
+                                            <Card.Text className="card-price">Rp. {e.harga} ,-</Card.Text>
+                                            <Card.Text className="card-rate">{e.rate > 0 ? (e.rate) : ("Unrated")}</Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+                    </Row>
+                </Container>    
                 ):(
-                    <></>
+                    <Loader/>
                 )}
-                <Row className="my-5 pt-5">
-                    <h1 className="home-header">Featured Products</h1>
-                </Row>
-                <Row xs={2} md={4} className="g-4 card-container mb-3">
-                    {this.state.featured_product.map((e, key) => (
-                        <Col key={key}>
-                            <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
-                                <Card.Img variant="top" alt={e.nama} src={e.thumbnail} />
-                                <Card.Body>
-                                    <Card.Title className="card-title">{e.nama}</Card.Title>
-                                    <Card.Text className="card-price">Rp. {e.harga} ,-</Card.Text>
-                                    <Card.Text className="card-rate">{e.rate > 0 ? (e.rate) : ("Unrated")}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-                <Row className="my-5 pt-5">
-                    <h1 className="home-header">Leatest Products</h1>
-                </Row>
-                <Row xs={1} md={3} className="g-4 card-container mb-3">
-                    {this.state.latest_product.map((e, key) => (
-                        <Col key={key}>
-                            <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
-                                <Card.Img variant="top" alt={e.nama} src={e.thumbnail} />
-                                <Card.Body>
-                                    <Row>
-                                        <Col md={8}><Card.Title className="card-title">{e.nama}</Card.Title></Col>
-                                        <Col md={4}><Card.Text className="card-price">Rp. {e.harga} ,-</Card.Text></Col>
-                                    </Row>
-                                    <Card.Text className="card-rate">{e.rate > 0 ? (e.rate) : ("Unrated")}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-                <Row className="my-3 pt-5">
-                    <h1 className="home-header">What Pakalolo Offer!</h1>
-                </Row>
-                <Row>
-                    <Col md={3} className="centered offer-card">
-                        <span className="material-symbols-outlined offer-card-icon mb-3">
-                            local_shipping
-                        </span>
-                        <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                        <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
-                    </Col>
-                    <Col md={3} className="centered offer-card">
-                        <span className="material-symbols-outlined offer-card-icon mb-3">
-                            local_shipping
-                        </span>
-                        <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                        <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
-                    </Col>
-                    <Col md={3} className="centered offer-card">
-                        <span className="material-symbols-outlined offer-card-icon mb-3">
-                            local_shipping
-                        </span>
-                        <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                        <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
-                    </Col>
-                    <Col md={3} className="centered offer-card">
-                        <span className="material-symbols-outlined offer-card-icon mb-3">
-                            local_shipping
-                        </span>
-                        <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                        <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
-                    </Col>
-                </Row>
-                <Row className="my-5 pt-5">
-                    <h1 className="home-header">Trending Product</h1>
-                </Row>
-                <Row xs={2} md={4} className="g-4 card-container">
-                    {this.state.popular_product.map((e, key) => (
-                        <Col key={key}>
-                            <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
-                                <Card.Img variant="top" alt={e.nama} src={e.thumbnail} />
-                                <Card.Body>
-                                    <Card.Title className="card-title">{e.nama}</Card.Title>
-                                    <Card.Text className="card-price">Rp. {e.harga} ,-</Card.Text>
-                                    <Card.Text className="card-rate">{e.rate > 0 ? (e.rate) : ("Unrated")}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+            </>
         )
     }
 }
