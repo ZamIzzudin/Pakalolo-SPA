@@ -92,12 +92,10 @@ class AddProduct extends Component {
                             <Form.Group className="mb-3">
                                 <Form.Label>Kategori</Form.Label>
                                 <Form.Select onChange={(e) => this.setState({ kategoriProduk: e.target.value })}>
-                                    <option value="Hoodie">Hoodie</option>
-                                    <option value="T-Shirt">T-Shirt</option>
-                                    <option value="Jacket">Jacket</option>
-                                    <option value="Kemeja">Kemeja</option>
-                                    <option value="Sweater">Sweater</option>
-                                    <option value="Celana">Celana</option>
+                                    <option value="Sepatu Pria">Hoodie</option>
+                                    <option value="Sepatu Wanita">T-Shirt</option>
+                                    <option value="Sepatu Anak">Jacket</option>
+                                    <option value="Sendal">Kemeja</option>
                                 </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3 stok-form">

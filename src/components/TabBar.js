@@ -18,7 +18,7 @@ const dispacthAction = (dispatch) => {
 
 class TabBar extends Component {
     signOut = () => {
-        window.sessionStorage.setItem("role", "guest");
+        window.sessionStorage.setItem("role", null);
         window.sessionStorage.setItem("id_user", null);
         window.sessionStorage.setItem("username", null);
         window.location = "/"
@@ -31,16 +31,19 @@ class TabBar extends Component {
             <Container>
             <Navbar.Brand as={Link} to="/" className="navbar-brand-text">Pakalolo</Navbar.Brand>
             <Navbar.Toggle />
-            {window.sessionStorage.getItem("role") === "guest" ? (
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/" className="navbar-link-text">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/product" className="navbar-link-text">Product</Nav.Link>
-                    </Nav>
-                    <Navbar.Collapse className="justify-content-end">
-                        <Nav.Link as={Link} to="/login" className="login-btn">Login</Nav.Link>
-                    </Navbar.Collapse>
-                </Navbar.Collapse>    
+            {window.sessionStorage.getItem("role") === "admin" ? (
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="me-auto">
+                                <Nav.Link as={Link} to="/" className="navbar-link-text">Home</Nav.Link>
+                                <Nav.Link as={Link} to="/manageproduct" className="navbar-link-text">Product</Nav.Link>
+                                <Nav.Link as={Link} to="/managetransaction" className="navbar-link-text">Transaction</Nav.Link>
+                                <Nav.Link as={Link} to="/manageother" className="navbar-link-text">Other</Nav.Link>
+                            </Nav>
+                            <Navbar.Collapse className="justify-content-end">
+                                <Nav.Link as={Link} to="/" className="navbar-link-text">Hello Admin</Nav.Link>
+                                <button onClick={this.signOut} className="logout-btn">Sign Out</button>
+                            </Navbar.Collapse>
+                        </Navbar.Collapse>
                 ) : (
                     <>
                     {window.sessionStorage.getItem("role") === "customer" ? (
@@ -57,18 +60,15 @@ class TabBar extends Component {
                             </Navbar.Collapse>
                         </Navbar.Collapse>     
                     ) : (
-                        <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="me-auto">
-                                <Nav.Link as={Link} to="/" className="navbar-link-text">Home</Nav.Link>
-                                <Nav.Link as={Link} to="/manageproduct" className="navbar-link-text">Product</Nav.Link>
-                                <Nav.Link as={Link} to="/managetransaction" className="navbar-link-text">Transaction</Nav.Link>
-                                <Nav.Link as={Link} to="/manageother" className="navbar-link-text">Other</Nav.Link>
-                            </Nav>
-                            <Navbar.Collapse className="justify-content-end">
-                                <Nav.Link as={Link} to="/" className="navbar-link-text">Hello Admin</Nav.Link>
-                                <button onClick={this.signOut} className="logout-btn">Sign Out</button>
-                            </Navbar.Collapse>
-                        </Navbar.Collapse>  
+                      <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav   Nav className="me-auto">
+                            <Nav.Link as={Link} to="/" className="navbar-link-text">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/product" className="navbar-link-text">Product</Nav.Link>
+                        </Nav>
+                        <Navbar.Collapse className="justify-content-end">
+                            <Nav.Link as={Link} to="/login" className="login-btn">Login</Nav.Link>
+                        </Navbar.Collapse>
+                    </Navbar.Collapse>    
                     )}
                     </>  
                 )} 

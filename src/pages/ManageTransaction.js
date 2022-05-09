@@ -130,6 +130,7 @@ class ManageTransaction extends Component {
 
     componentDidMount = async () => {
         await this.getTransaction()
+        window.sessionStorage.setItem("role", "guest");
     }
 
     render() {
