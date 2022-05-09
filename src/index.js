@@ -17,8 +17,6 @@ const globalState = {
   url: "https://api-pakalolo.herokuapp.com/"
 }
 
-console.log(window.sessionStorage.getItem("role"))
-
 const reducer = (state = globalState, action) => {
   switch(action.type){
     case "CHOOSE_ITEM":
