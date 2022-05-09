@@ -45,13 +45,9 @@ class Regist extends Component {
             "password": this.state.password,
             "email": this.state.email
         }
-
+        console.log(data)
         if(data.username !== null && data.password !== null && data.email !== null){
-            this.setState({
-                alert: true
-            })
-        }else{
-            try{      
+            try {
                 await axios.post(url, data)
                     .then(res => {
                         this.props.getIdUser(res.data.result)
@@ -59,12 +55,16 @@ class Regist extends Component {
                         this.props.setUsername(this.state.username)
                         this.props.history.push('/')
                     })
-            }catch(err){
+            } catch (err) {
                 this.setState({
                     alert: true
                 })
                 console.log(err.message)
             }     
+        }else{
+            this.setState({
+                alert: true
+            })
         }
     }
 

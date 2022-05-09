@@ -105,7 +105,7 @@ class Home extends Component {
                         <Carousel.Item>
                             <Row>
                                 <Col xs={6} md={6} className="left-banner centered">
-                                    <Image alt="carousel-thumbnail" className="banner-img banner-1-img" src={this.state.banner[0].thumbnail} />
+                                    <Image alt="banner thumbnail" className="banner-img banner-1-img" src={this.state.banner[0].thumbnail} />
                                 </Col>
                                 <Col xs={6} md={6} className="right-banner centered">
                                     <h2 className="banner-title">{this.state.banner[0].title}</h2>
@@ -121,7 +121,7 @@ class Home extends Component {
                                     <h4 className="banner-desc my-4">{this.state.banner[1].deskripsi}</h4>
                                 </Col>
                                 <Col xs={4} md={4} className="middle-banner centered">
-                                    <Image alt="carousel-thumbnail" className="banner-img banner-2-img" src={this.state.banner[1].thumbnail} />
+                                    <Image alt="banner thumbnail" className="banner-img banner-2-img" src={this.state.banner[1].thumbnail} />
                                 </Col>
                                 <Col xs={4} md={4} className="right-banner centered">
                                     <Button className="banner-btn orange-btn">Order</Button>
@@ -136,7 +136,7 @@ class Home extends Component {
                                     <Button className="banner-btn orange-btn">Order</Button>
                                 </Col>
                                 <Col xs={6} md={6} className="right-banner centered">
-                                    <Image alt="carousel-thumbnail" className="banner-img banner-3-img" src={this.state.banner[2].thumbnail} />
+                                    <Image alt="banner thumbnail" className="banner-img banner-3-img" src={this.state.banner[2].thumbnail} />
                                 </Col>
                             </Row>
                         </Carousel.Item>

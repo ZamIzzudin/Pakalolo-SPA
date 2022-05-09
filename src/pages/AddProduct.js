@@ -40,10 +40,6 @@ class AddProduct extends Component {
         const url = this.props.url + "storage"
 
         if (data.nama !== null && data.harga !== null && data.kategori !== null && data.deskripsi === null && data.thumbnail !== null && data.stok !== 0){
-            this.setState({
-                alert : true
-            })
-        }else{
             try{
                 await axios.post(url, data)
                     .then(res => {
@@ -51,7 +47,11 @@ class AddProduct extends Component {
                     })
             }catch(err){
                 console.log(err.message)
-            }    
+            } 
+        }else{
+            this.setState({
+                alert: true
+            })   
         }
         
     }

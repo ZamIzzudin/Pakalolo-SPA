@@ -57,11 +57,7 @@ class Order extends Component {
             "no_telp" : this.state.no_telp
         }
         if(data.nama_pembeli !== null && data.alamat !== null && data.no_telp !== null){
-            this.setState({
-                alert : true
-            })
-        }else{
-            try{
+             try{
                 await axios.post(url, data)
                 .then(res=>{
                     this.props.history.push('/transaction')
@@ -69,6 +65,10 @@ class Order extends Component {
             }catch(err){
                 console.log(err.message)
             }    
+        }else{
+            this.setState({
+                alert: true
+            })
         }
     }
 
