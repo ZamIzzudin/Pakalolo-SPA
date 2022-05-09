@@ -255,7 +255,7 @@ class Detail extends Component {
                 </Row>
                 <Row className="detail-product-card drop-shadow">
                     <Col className="detail-product-thumbnail-viewport">
-                        <Image className="detail-product-thumbnail" fluid src={this.state.itemDetail.thumbnail} />
+                        <Image className="detail-product-thumbnail" alt="card-thumbnail" fluid src={this.state.itemDetail.thumbnail} />
                     </Col>
                     <Col className="my-5 py-5 detail-product-text-container">
                         <h1 className="detail-product-main-text">{this.state.itemDetail.nama}</h1>

@@ -103,7 +103,7 @@ class Profile extends Component {
                 {this.state.data_user.length > 0 ? (
                 <>
                     <Row>
-                        <Image fluid src={this.state.data_user[0].pofile_picture} className="rounded-circle avatar"/>
+                        <Image alt="profile-picture" fluid src={this.state.data_user[0].pofile_picture} className="rounded-circle avatar"/>
                     </Row>
                     <Row className="my-5 profile-data">
                         <Form className="mb-3 order-form">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Card, Col, Row, Button, Image } from 'react-bootstrap'
+import { Card, Col, Row, Button, Image } from 'react-bootstrap'
 import axios from 'axios';
 import ModalTransaction from '../components/ModalTransaction';
 import ModalDelivery from '../components/ModalDelivery';
@@ -157,7 +157,7 @@ class ManageTransaction extends Component {
                                     <Card.Body>
                                         <Row>
                                             <Col xs={6} md={3} className="card-transaction-image">
-                                                <Image fluid src={e.thumbnail} />
+                                                <Image alt="card-thumbnail" fluid src={e.thumbnail} />
                                             </Col>
                                             <Col xs={6} md={6} className="card-transaction-desc centered">
                                                 <Card.Text className="card-transaction-title">{e.nama}</Card.Text>

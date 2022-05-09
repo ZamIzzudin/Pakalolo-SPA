@@ -189,7 +189,7 @@ class Transaction extends Component{
                                     <Card.Body className="card-body-container">
                                         <Row>
                                             <Col xs={6} md={3} className="card-transaction-image">
-                                                <Image fluid src={e.thumbnail}/>
+                                                <Image alt="card-thumbnail" fluid src={e.thumbnail}/>
                                             </Col>
                                             <Col xs={6} md={6} className="card-transaction-desc centered">
                                                 <Card.Text className="card-transaction-title">{e.nama}</Card.Text>

@@ -182,7 +182,7 @@ class Order extends Component {
                     </Col>
                     <Col className="order-detail-form">
                         <div className="detail-container">
-                            <Image fluid className="order-detail-thumb" src={this.state.data.thumbnail} />
+                            <Image alt="order-thumbnail" fluid className="order-detail-thumb" src={this.state.data.thumbnail} />
                             <Col>
                                 <h2 className="wishlist-product-title">{this.state.data.nama} x ( {this.state.data.jumlah === undefined ? this.props.quantity : this.state.data.jumlah} )</h2>
                                 <h3 className="wishlist-product-title">Rp. {this.state.data.total_harga === undefined ? this.state.data.harga * this.props.quantity : this.state.data.total_harga} ,-</h3>

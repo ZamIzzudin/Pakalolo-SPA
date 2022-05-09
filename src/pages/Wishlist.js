@@ -105,7 +105,7 @@ class Wishlist extends Component {
                             <tr key={key}>
                                 <td className="wishlist-product-row">
                                     <Col>
-                                        <Image src={e.thumbnail} className="wishlist-thumbnail"/>
+                                        <Image alt="wishlst-thumbnail" src={e.thumbnail} className="wishlist-thumbnail"/>
                                     </Col>
                                     <Col className="wishlist-product">
                                         <h3 className="wishlist-product-title">{e.nama}</h3>
