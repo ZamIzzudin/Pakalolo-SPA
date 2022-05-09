@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { Form, Col, Row, Button, Alert } from 'react-bootstrap'
 
 import axios from 'axios'
@@ -80,7 +81,7 @@ class Login extends Component {
                         <Button onClick={this.checkLogin} className="prim-btn">
                             Sign In
                         </Button>
-                        <h4 className="my-4 text-center sec-text">Don't have an Account? <a href="/regist" className="signup-link">Create Account</a></h4>
+                        <h4 className="my-4 text-center sec-text">Don't have an Account? <Link to="/regist" className="signup-link">Create Account</Link></h4>
                     </Col>
                     <Col xs={1} md={3}></Col>
                 </Row>
