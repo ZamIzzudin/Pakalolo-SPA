@@ -267,11 +267,14 @@ class Detail extends Component {
                             You have fill the quantity and size
                         </Alert>
                         <div className="size-btn-container">
-                            <Button className="size-btn" onClick={()=> this.setState({ukuran : "S"})}>S</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "M"})}>M</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "L"})}>L</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "XL"})}>XL</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "XXL"})}>XXL</Button>
+                            <Button className="size-btn" onClick={()=> this.setState({ukuran : "37"})}>37</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ukuran : "38"})}>38</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ukuran : "39"})}>39</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ukuran : "40"})}>40</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ukuran : "41"})}>41</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "42" })}>42</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "43" })}>43</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "44" })}>44</Button>
                         </div>
                         <div className="qty-btn-container">
                             <Button className=" qty-btn" onClick={() => { this.state.quantity > 0 ? this.setState({ quantity: this.state.quantity - 1 }) : this.setState({ quantity: 0 }) }}>-</Button>
