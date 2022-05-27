@@ -23,7 +23,7 @@ class AddProduct extends Component {
             hargaProduk : null,
             deskripsiProduk : null,
             thumbnailProduk : null,
-            kategoriProduk : null,
+            kategoriProduk : "Sepatu",
             alert : false
         }
     }
@@ -38,9 +38,8 @@ class AddProduct extends Component {
             stok : this.state.stok
         }
         const url = this.props.url + "storage"
-        console.log(data)
 
-        if (data.nama !== null && data.harga !== null && data.kategori !== null && data.deskripsi === null && data.thumbnail !== null && data.stok !== 0){
+        if (data.nama !== null && data.harga !== null && data.kategori !== null && data.deskripsi !== null && data.thumbnail !== null && data.stok !== 0){
             try{
                 await axios.post(url, data)
                     .then(res => {
@@ -91,7 +90,7 @@ class AddProduct extends Component {
                                 <Form.Control type="text" onChange={(e) => this.setState({ thumbnailProduk: e.target.value })}/>
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>{this.state.kategoriProduk}</Form.Label>
+                                <Form.Label>Kategori</Form.Label>
                                 <Form.Select onChange={(e) => this.setState({ kategoriProduk: e.target.value })}>
                                     <option value="Sepatu">Sepatu</option>
                                     <option value="Sandal">Sandal</option>
