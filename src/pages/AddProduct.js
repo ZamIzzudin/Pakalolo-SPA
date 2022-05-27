@@ -38,6 +38,7 @@ class AddProduct extends Component {
             stok : this.state.stok
         }
         const url = this.props.url + "storage"
+        console.log(data)
 
         if (data.nama !== null && data.harga !== null && data.kategori !== null && data.deskripsi === null && data.thumbnail !== null && data.stok !== 0){
             try{
@@ -90,10 +91,10 @@ class AddProduct extends Component {
                                 <Form.Control type="text" onChange={(e) => this.setState({ thumbnailProduk: e.target.value })}/>
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>Kategori</Form.Label>
+                                <Form.Label>{this.state.kategoriProduk}</Form.Label>
                                 <Form.Select onChange={(e) => this.setState({ kategoriProduk: e.target.value })}>
-                                    <option value="Sepatu Pria">Sepatu</option>
-                                    <option value="Sepatu Wanita">Sandal</option>
+                                    <option value="Sepatu">Sepatu</option>
+                                    <option value="Sandal">Sandal</option>
                                 </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3 stok-form">
