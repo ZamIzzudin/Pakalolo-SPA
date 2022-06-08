@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const recieveState = (state) => {
     return {
         username: state.username,
-        url : state.url
+        url: state.url
     }
 }
 
@@ -31,10 +31,10 @@ class Regist extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username : null,
-            email : null,
-            password : null,
-            alert : false
+            username: null,
+            email: null,
+            password: null,
+            alert: false
         }
     }
 
@@ -46,22 +46,23 @@ class Regist extends Component {
             "email": this.state.email
         }
         console.log(data)
-        if(data.username !== null && data.password !== null && data.email !== null){
+        if (data.username !== null && data.password !== null && data.email !== null) {
             try {
                 await axios.post(url, data)
                     .then(res => {
-                        this.props.getIdUser(res.data.result)
-                        this.props.setRole()
-                        this.props.setUsername(this.state.username)
+                        window.sessionStorage.setItem("id_user", res.data.result);
+                        window.sessionStorage.setItem("username", this.state.username);
+                        window.sessionStorage.setItem("role", "customer");
                         this.props.history.push('/')
+                        window.location.reload();
                     })
             } catch (err) {
                 this.setState({
                     alert: true
                 })
                 console.log(err.message)
-            }     
-        }else{
+            }
+        } else {
             this.setState({
                 alert: true
             })
@@ -85,10 +86,10 @@ class Regist extends Component {
                         </Alert>
                         <Form>
                             <Form.Group className="mb-3 mt-2">
-                                <Form.Control type="text" onChange={(e) => { this.setState({ username: e.target.value }) }} placeholder="Username" className="login-inp"/>
+                                <Form.Control type="text" onChange={(e) => { this.setState({ username: e.target.value }) }} placeholder="Username" className="login-inp" />
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Control type="email" onChange={(e) => { this.setState({ email: e.target.value }) }} placeholder="Email Address" className="login-inp"/>
+                                <Form.Control type="email" onChange={(e) => { this.setState({ email: e.target.value }) }} placeholder="Email Address" className="login-inp" />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Control type="password" onChange={(e) => { this.setState({ password: e.target.value }) }} placeholder="Password" className="login-inp" />
