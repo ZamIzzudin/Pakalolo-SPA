@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Carousel, Row,Col, Card, Button, Image } from 'react-bootstrap'
+import { Container, Carousel, Row, Col, Card, Button, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -7,16 +7,16 @@ import Loader from '../components/Loader'
 
 const recieveState = (state) => {
     return {
-        url : state.url
+        url: state.url
     }
 }
 
 const dispacthAction = (dispatch) => {
     return {
-       getIdItem :(e) => {
-      const action = {type: "CHOOSE_ITEM", id_item: e}
-      dispatch(action)
-    }
+        getIdItem: (e) => {
+            const action = { type: "CHOOSE_ITEM", id_item: e }
+            dispatch(action)
+        }
     }
 }
 
@@ -24,24 +24,24 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            featured_product : [],
-            latest_product : [],
-            popular_product : [],
-            banner : []
+            featured_product: [],
+            latest_product: [],
+            popular_product: [],
+            banner: []
         }
     }
 
     getFeaturedProject = async () => {
         const url = this.props.url + "getFeatured"
 
-        try{
+        try {
             await axios.get(url)
-                .then(res=>{
+                .then(res => {
                     this.setState({
-                        featured_product : res.data.data
+                        featured_product: res.data.data
+                    })
                 })
-            })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -49,14 +49,14 @@ class Home extends Component {
     getBanner = async () => {
         const url = this.props.url + "banner"
 
-        try{
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
-                        banner : res.data.data
+                        banner: res.data.data
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -64,14 +64,14 @@ class Home extends Component {
     getLatestProduct = async () => {
         const url = this.props.url + "latestProduct"
 
-        try{
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
                         latest_product: res.data.data
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -98,55 +98,55 @@ class Home extends Component {
         await this.getBanner();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <>
                 {this.state.banner.length > 0 ? (
-                <Container className="pt-5 centered">
-                    <Carousel variant="dark">
-                        <Carousel.Item>
-                            <Row>
-                                <Col xs={6} md={6} className="left-banner centered">
-                                    <Image alt="banner thumbnail" className="banner-img banner-1-img" src={this.state.banner[0].thumbnail} />
-                                </Col>
-                                <Col xs={6} md={6} className="right-banner centered">
-                                    <h2 className="banner-title">{this.state.banner[0].title}</h2>
-                                    <h4 className="banner-desc my-4">{this.state.banner[0].deskripsi}</h4>
-                                    <Button className="banner-btn orange-btn">Order</Button>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <Row>
-                                <Col xs={4} md={4} className="left-banner centered">
-                                    <h2 className="banner-title">{this.state.banner[1].title}</h2>
-                                    <h4 className="banner-desc my-4">{this.state.banner[1].deskripsi}</h4>
-                                </Col>
-                                <Col xs={4} md={4} className="middle-banner centered">
-                                    <Image alt="banner thumbnail" className="banner-img banner-2-img" src={this.state.banner[1].thumbnail} />
-                                </Col>
-                                <Col xs={4} md={4} className="right-banner centered">
-                                    <Button className="banner-btn orange-btn">Order</Button>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <Row>
-                                <Col xs={6} md={6} className="left-banner centered">
-                                    <h2 className="banner-title">{this.state.banner[2].title}</h2>
-                                    <h4 className="banner-desc my-4">{this.state.banner[2].deskripsi}</h4>
-                                    <Button className="banner-btn orange-btn">Order</Button>
-                                </Col>
-                                <Col xs={6} md={6} className="right-banner centered">
-                                    <Image alt="banner thumbnail" className="banner-img banner-3-img" src={this.state.banner[2].thumbnail} />
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                    </Carousel>
-                    <Row className="my-5 pt-5">
+                    <Container className="pt-5 centered">
+                        <Carousel variant="dark">
+                            <Carousel.Item>
+                                <Row>
+                                    <Col xs={6} md={6} className="left-banner centered">
+                                        <Image alt="banner thumbnail" className="banner-img banner-1-img" src={this.state.banner[0].thumbnail} />
+                                    </Col>
+                                    <Col xs={6} md={6} className="right-banner centered">
+                                        <h2 className="banner-title">{this.state.banner[0].title}</h2>
+                                        <h4 className="banner-desc my-4">{this.state.banner[0].deskripsi}</h4>
+                                        <Button className="banner-btn orange-btn">Order</Button>
+                                    </Col>
+                                </Row>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <Row>
+                                    <Col xs={4} md={4} className="left-banner centered">
+                                        <h2 className="banner-title">{this.state.banner[1].title}</h2>
+                                        <h4 className="banner-desc my-4">{this.state.banner[1].deskripsi}</h4>
+                                    </Col>
+                                    <Col xs={4} md={4} className="middle-banner centered">
+                                        <Image alt="banner thumbnail" className="banner-img banner-2-img" src={this.state.banner[1].thumbnail} />
+                                    </Col>
+                                    <Col xs={4} md={4} className="right-banner centered">
+                                        <Button className="banner-btn orange-btn">Order</Button>
+                                    </Col>
+                                </Row>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <Row>
+                                    <Col xs={6} md={6} className="left-banner centered">
+                                        <h2 className="banner-title">{this.state.banner[2].title}</h2>
+                                        <h4 className="banner-desc my-4">{this.state.banner[2].deskripsi}</h4>
+                                        <Button className="banner-btn orange-btn">Order</Button>
+                                    </Col>
+                                    <Col xs={6} md={6} className="right-banner centered">
+                                        <Image alt="banner thumbnail" className="banner-img banner-3-img" src={this.state.banner[2].thumbnail} />
+                                    </Col>
+                                </Row>
+                            </Carousel.Item>
+                        </Carousel>
+                        <Row className="my-5 pt-5">
                             <h1 className="home-header">Featured Products</h1>
-                    </Row>
-                    <Row xs={2} md={4} className="g-4 card-container mb-3">
+                        </Row>
+                        <Row xs={2} md={4} className="g-4 card-container mb-3">
                             {this.state.featured_product.map((e, key) => (
                                 <Col key={key}>
                                     <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
@@ -159,11 +159,11 @@ class Home extends Component {
                                     </Card>
                                 </Col>
                             ))}
-                    </Row>
-                    <Row className="my-5 pt-5">
+                        </Row>
+                        <Row className="my-5 pt-5">
                             <h1 className="home-header">Leatest Products</h1>
-                    </Row>
-                    <Row xs={1} md={3} className="g-4 card-container mb-3">
+                        </Row>
+                        <Row xs={1} md={3} className="g-4 card-container mb-3">
                             {this.state.latest_product.map((e, key) => (
                                 <Col key={key}>
                                     <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
@@ -178,44 +178,44 @@ class Home extends Component {
                                     </Card>
                                 </Col>
                             ))}
-                    </Row>
-                    <Row className="my-3 pt-5">
+                        </Row>
+                        <Row className="my-3 pt-5">
                             <h1 className="home-header">What Pakalolo Offer!</h1>
-                    </Row>
-                    <Row>
+                        </Row>
+                        <Row>
                             <Col md={3} className="centered offer-card">
-                                <span className="material-symbols-outlined offer-card-icon mb-3">
-                                    local_shipping
+                                <span class="material-symbols-outlined offer-card-icon mb-3">
+                                    support_agent
                                 </span>
                                 <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
+                                <h5 className="offer-card-desc">Our admin is ready to serve you wherever and whenever</h5>
+                            </Col>
+                            <Col md={3} className="centered offer-card">
+                                <span class="material-symbols-outlined offer-card-icon mb-3">
+                                    payments
+                                </span>
+                                <h4 className="offer-card-title mb-3">Integrated Payment</h4>
+                                <h5 className="offer-card-desc">Payments will be easier with your favorite e-wallet platform</h5>
+                            </Col>
+                            <Col md={3} className="centered offer-card">
+                                <span class="material-symbols-outlined offer-card-icon mb-3">
+                                    workspace_premium
+                                </span>
+                                <h4 className="offer-card-title mb-3">Guaranteed Product</h4>
+                                <h5 className="offer-card-desc">Ensure that the product that reaches you is our best product</h5>
                             </Col>
                             <Col md={3} className="centered offer-card">
                                 <span className="material-symbols-outlined offer-card-icon mb-3">
                                     local_shipping
                                 </span>
-                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
+                                <h4 className="offer-card-title mb-3">Fast Shipping</h4>
+                                <h5 className="offer-card-desc">The product will arrive quickly and safely to your place</h5>
                             </Col>
-                            <Col md={3} className="centered offer-card">
-                                <span className="material-symbols-outlined offer-card-icon mb-3">
-                                    local_shipping
-                                </span>
-                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
-                            </Col>
-                            <Col md={3} className="centered offer-card">
-                                <span className="material-symbols-outlined offer-card-icon mb-3">
-                                    local_shipping
-                                </span>
-                                <h4 className="offer-card-title mb-3">24/7 Support</h4>
-                                <h5 className="offer-card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</h5>
-                            </Col>
-                    </Row>
-                    <Row className="my-5 pt-5">
+                        </Row>
+                        <Row className="my-5 pt-5">
                             <h1 className="home-header">Trending Product</h1>
-                    </Row>
-                    <Row xs={2} md={4} className="g-4 card-container">
+                        </Row>
+                        <Row xs={2} md={4} className="g-4 card-container">
                             {this.state.popular_product.map((e, key) => (
                                 <Col key={key}>
                                     <Card className="featured-card" as={Link} onClick={() => { this.props.getIdItem(e.id) }} to="/detail">
@@ -228,10 +228,10 @@ class Home extends Component {
                                     </Card>
                                 </Col>
                             ))}
-                    </Row>
-                </Container>    
-                ):(
-                    <Loader/>
+                        </Row>
+                    </Container>
+                ) : (
+                    <Loader />
                 )}
             </>
         )

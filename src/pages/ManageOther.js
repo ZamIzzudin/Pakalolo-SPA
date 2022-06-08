@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const recieveState = (state) => {
     return {
-        url : state.url
+        url: state.url
     }
 }
 
@@ -18,98 +18,98 @@ class ManageOther extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nama : "",
-            jenis_pengiriman : "",
-            durasi : "",
-            harga : "",
-            alert : false,
+            nama: "",
+            jenis_pengiriman: "",
+            durasi: "",
+            harga: "",
+            alert: false,
             alert2: false,
-            featured_product : [],
-            b_image : "",
-            b_title : "",
-            b_desc : "",
-            banner_id : null,
-            add_promotion : null,
-            all_product : []
+            featured_product: [],
+            b_image: "",
+            b_title: "",
+            b_desc: "",
+            banner_id: null,
+            add_promotion: null,
+            all_product: []
         }
     }
 
     addJasaPengiriman = async () => {
         const data = {
-            nama : this.state.nama,
-            jenis_pengiriman : this.state.jenis_pengiriman,
-            durasi : this.state.durasi,
-            harga : this.state.harga
+            nama: this.state.nama,
+            jenis_pengiriman: this.state.jenis_pengiriman,
+            durasi: this.state.durasi,
+            harga: this.state.harga
         }
         const url = this.props.url + "newDeliveryVend"
 
-        if(data.nama !== "" && data.jenis_pengiriman !== "" && data.durasi !== "" && data.harga !== ""){
-            try{
+        if (data.nama !== "" && data.jenis_pengiriman !== "" && data.durasi !== "" && data.harga !== "") {
+            try {
                 console.log('ok')
                 await axios.post(url, data)
                     .then(res => {
                         this.props.history.push('/manageother')
                         this.setState({
-                            nama : null,
-                            jenis_pengiriman : null,
-                            durasi : null,
-                            harga : null,
-                            alert : false
+                            nama: null,
+                            jenis_pengiriman: null,
+                            durasi: null,
+                            harga: null,
+                            alert: false
                         })
                     })
-            }catch(err){
+            } catch (err) {
                 console.log(err.message)
-            }   
-        }else{
+            }
+        } else {
             this.setState({
-                alert : true
+                alert: true
             })
         }
-        
+
     }
 
     getBanner = async (e) => {
         const url = this.props.url + "banner/" + e
-        try{
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
-                        b_thumbnail : res.data.data[0].thumbnail,
-                        b_title : res.data.data[0].title,
-                        b_desc : res.data.data[0].deskripsi,
-                        banner_id : e
+                        b_thumbnail: res.data.data[0].thumbnail,
+                        b_title: res.data.data[0].title,
+                        b_desc: res.data.data[0].deskripsi,
+                        banner_id: e
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
 
     updateBanner = async (e) => {
         const data = {
-            title : this.state.b_title,
-            thumbnail : this.state.b_thumbnail,
-            deskripsi : this.state.b_desc
+            title: this.state.b_title,
+            thumbnail: this.state.b_thumbnail,
+            deskripsi: this.state.b_desc
         }
         const url = this.props.url + "banner/" + this.state.banner_id
-        if(data.title !== "" && data.thumbnail !== "" && data.deskripsi !== ""){
-            try{
+        if (data.title !== "" && data.thumbnail !== "" && data.deskripsi !== "") {
+            try {
                 await axios.put(url, data)
                     .then(res => {
                         this.props.history.push('/manageother')
                         this.setState({
-                            b_title : "",
-                            b_thumbnail : "",
-                            b_desc : "",
-                            alert2 : false
+                            b_title: "",
+                            b_thumbnail: "",
+                            b_desc: "",
+                            alert2: false
                         })
                     })
-            }catch(err){
+            } catch (err) {
                 console.log(err.message)
             }
-        }else{
+        } else {
             this.setState({
-                alert2 : true
+                alert2: true
             })
         }
     }
@@ -131,26 +131,26 @@ class ManageOther extends Component {
 
     getProduct = async () => {
         const url = this.props.url + "all_sale/ASC"
-        try{
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
-                        all_product : res.data.data
+                        all_product: res.data.data
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
 
     addPromotion = async () => {
         const url = this.props.url + "managePromotion/" + this.state.add_promotion
-        try{
+        try {
             await axios.post(url)
                 .then(res => {
                     this.getFeaturedProject();
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -206,10 +206,10 @@ class ManageOther extends Component {
                                         <Form.Label>Harga</Form.Label>
                                         <Form.Control type="text" value={this.state.harga} onChange={(e) => { this.setState({ harga: e.target.value }) }} />
                                     </Form.Group>
-                                </Col>           
+                                </Col>
                                 <Col>
                                     <Button onClick={this.addJasaPengiriman} className="orange-btn">Add</Button>
-                                </Col>                      
+                                </Col>
                             </Row>
                         </Form>
                     </Col>
@@ -221,9 +221,9 @@ class ManageOther extends Component {
                             </Alert>
                             <Row>
                                 <Col className="centered-row mt-2 mb-4">
-                                    <Button className="orange-btn mx-2" onClick={() => { this.getBanner(1)}}>Banner 1</Button>
-                                    <Button className="orange-btn mx-2" onClick={() => { this.getBanner(2)}}>Banner 2</Button>
-                                    <Button className="orange-btn mx-2" onClick={() => { this.getBanner(3)}}>Banner 3</Button>
+                                    <Button className="orange-btn mx-2" onClick={() => { this.getBanner(1) }}>Banner 1</Button>
+                                    <Button className="orange-btn mx-2" onClick={() => { this.getBanner(2) }}>Banner 2</Button>
+                                    <Button className="orange-btn mx-2" onClick={() => { this.getBanner(3) }}>Banner 3</Button>
                                 </Col>
                             </Row>
                             <Row>
@@ -251,7 +251,7 @@ class ManageOther extends Component {
                     </Col>
                 </Row>
                 <Row className="my-5 promotion-manage">
-                    <h2 className="form-title mb-3">Update Banner</h2>
+                    <h2 className="form-title mb-3">Update Featured Product</h2>
                     <Table className="promotion-table">
                         <thead>
                             <tr>
@@ -261,15 +261,15 @@ class ManageOther extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.featured_product.map((e,key) => {
-                                return(
-                                <tr>
-                                    <td>{e.nama}</td>
-                                    <td>{e.jenis_promotion}</td>
-                                    <td><Button className="outline-orange-btn" onClick={() => {this.deletePromotion(e.id)}}>Delete</Button></td>
-                                </tr>    
-                                )   
-                            })}                        
+                            {this.state.featured_product.map((e, key) => {
+                                return (
+                                    <tr>
+                                        <td>{e.nama}</td>
+                                        <td>{e.jenis_promotion}</td>
+                                        <td><Button className="outline-orange-btn" onClick={() => { this.deletePromotion(e.id) }}>Delete</Button></td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </Table>
                     <Row>
@@ -277,9 +277,9 @@ class ManageOther extends Component {
                             <Form>
                                 <Form.Group>
                                     <Form.Select onChange={(e) => { this.setState({ add_promotion: e.target.value }) }}>
-                                        {this.state.all_product.map((e,key) => {
-                                            return(
-                                                <option value={e.id} key={key} >{e.nama}</option>   
+                                        {this.state.all_product.map((e, key) => {
+                                            return (
+                                                <option value={e.id} key={key} >{e.nama}</option>
                                             )
                                         })}
                                     </Form.Select>
@@ -287,10 +287,10 @@ class ManageOther extends Component {
                             </Form>
                         </Col>
                         <Col>
-                            <Button onClick={this.addPromotion}>Add</Button> 
+                            <Button className="orange-btn" onClick={this.addPromotion}>Add</Button>
                         </Col>
                     </Row>
-                    
+
                 </Row>
             </Container>
         )
