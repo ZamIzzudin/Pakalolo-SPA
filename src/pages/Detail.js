@@ -5,17 +5,21 @@ import axios from 'axios';
 
 const recieveState = (state) => {
     return {
-        currentItem : state.currentItem,
-        id_user : state.id_user,
-        url : state.url
+        currentItem: state.currentItem,
+        id_user: state.id_user,
+        url: state.url
     }
 }
 
 const dispacthAction = (dispatch) => {
     return {
-        set_quantity: (e,x)=>{
-            const action = {type : 'SET_QUANTITY', quantity: e, order_from : "straith" , size : x}
-            dispatch(action)       
+        set_quantity: (e, x) => {
+            const action = { type: 'SET_QUANTITY', quantity: e, order_from: "straith", size: x }
+            dispatch(action)
+        },
+        set_currentItem: (e) => {
+            const action = { current_item: e }
+            dispatch(action)
         }
     }
 }
@@ -24,23 +28,23 @@ class Detail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemDetail : [],
-            quantity : 0,
-            ukuran : null,
-            review : [],
-            alert : false
+            itemDetail: [],
+            quantity: 0,
+            ukuran: null,
+            review: [],
+            alert: false
         }
     }
 
     addWishlist = async () => {
         const url = this.props.url + "wishlist"
         const data = {
-            "id_user" : this.props.id_user,
+            "id_user": this.props.id_user,
             "id_barang": this.state.itemDetail.id,
-            "jumlah" : this.state.quantity,
-            "ukuran" : this.state.ukuran
+            "jumlah": this.state.quantity,
+            "ukuran": this.state.ukuran
         }
-        if(data.jumlah > 0 && data.ukuran != null){
+        if (data.jumlah > 0 && data.ukuran != null) {
             try {
                 await axios.post(url, data)
                     .then(res => {
@@ -48,14 +52,14 @@ class Detail extends Component {
                             this.props.history.push('/wishlist')
                         } else {
                             this.setState({
-                                alert : true
+                                alert: true
                             })
                         }
                     })
             } catch (err) {
                 console.log(err.message)
             }
-        }else{
+        } else {
             this.setState({
                 alert: true
             })
@@ -65,19 +69,20 @@ class Detail extends Component {
     buyProduct = async () => {
         const quantity = this.state.quantity
         const ukuran = this.state.ukuran
-        const url = this.props.url + "kategori" 
+        const url = this.props.url + "kategori"
 
-        if(quantity > 0 && ukuran != null){
-            this.props.set_quantity(quantity,ukuran)
-            try{
+        if (quantity > 0 && ukuran != null) {
+            this.props.set_quantity(quantity, ukuran)
+
+            try {
                 await axios.get(url)
                     .then(res => {
                         this.props.history.push('/order')
                     })
-            }catch(err){
+            } catch (err) {
                 console.log(err.message)
             }
-        }else{
+        } else {
             this.setState({
                 alert: true
             })
@@ -86,23 +91,23 @@ class Detail extends Component {
 
     getDetail = async () => {
         const url = this.props.url + "storage/" + this.props.currentItem
-        try{
+        try {
             await axios.get(url)
-            .then(res => {
-                let data = res.data.data[0]
-                this.setState({
-                    itemDetail : data
+                .then(res => {
+                    let data = res.data.data[0]
+                    this.setState({
+                        itemDetail: data
+                    })
                 })
-            })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
 
     getRating = (e) => {
-        if(e === undefined || e === null){
+        if (e === undefined || e === null) {
             return <span className="unrated">Unrated</span>
-        }else if(e === 5){
+        } else if (e === 5) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -121,7 +126,7 @@ class Detail extends Component {
                 </span>
                 <span className="rate">({e})</span>
             </>)
-        }else if(e < 5 && e > 4){
+        } else if (e < 5 && e > 4) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -139,7 +144,7 @@ class Detail extends Component {
                     star_half
                 </span>
             </>)
-        }else if(e === 4){
+        } else if (e === 4) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -154,7 +159,7 @@ class Detail extends Component {
                     star
                 </span>
             </>)
-        }else if(e < 4 && e > 3){
+        } else if (e < 4 && e > 3) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -169,8 +174,8 @@ class Detail extends Component {
                     star_half
                 </span>
             </>)
-        }else if(e === 3){
-            return(<>
+        } else if (e === 3) {
+            return (<>
                 <span className="material-symbols-outlined star">
                     star
                 </span>
@@ -181,7 +186,7 @@ class Detail extends Component {
                     star
                 </span>
             </>)
-        }else if(e < 3 && e > 2){
+        } else if (e < 3 && e > 2) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -193,7 +198,7 @@ class Detail extends Component {
                     star_half
                 </span>
             </>)
-        }else if(e === 2){
+        } else if (e === 2) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -202,7 +207,7 @@ class Detail extends Component {
                     star
                 </span>
             </>)
-        }else if(e < 2 && e > 1){
+        } else if (e < 2 && e > 1) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
@@ -211,13 +216,13 @@ class Detail extends Component {
                     star_half
                 </span>
             </>)
-        }else if(e === 1){
+        } else if (e === 1) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star
                 </span>
             </>)
-        }else if(e < 1 && e > 0){
+        } else if (e < 1 && e > 0) {
             return (<>
                 <span className="material-symbols-outlined star">
                     star_half
@@ -228,15 +233,15 @@ class Detail extends Component {
 
     getReview = async () => {
         const url = this.props.url + "review/" + this.props.currentItem
-        
-        try{
+
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
-                        review : res.data.data
+                        review: res.data.data
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -246,8 +251,8 @@ class Detail extends Component {
         await this.getReview();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <Container className="pt-5 centered">
                 <Row className="mb-4 page-info">
                     <h1 className="prim-text">Product Details</h1>
@@ -267,11 +272,11 @@ class Detail extends Component {
                             You have fill the quantity and size
                         </Alert>
                         <div className="size-btn-container">
-                            <Button className="size-btn" onClick={()=> this.setState({ukuran : "37"})}>37</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "38"})}>38</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "39"})}>39</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "40"})}>40</Button>
-                            <Button className="size-btn" onClick={() => this.setState({ukuran : "41"})}>41</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "37" })}>37</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "38" })}>38</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "39" })}>39</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "40" })}>40</Button>
+                            <Button className="size-btn" onClick={() => this.setState({ ukuran: "41" })}>41</Button>
                             <Button className="size-btn" onClick={() => this.setState({ ukuran: "42" })}>42</Button>
                             <Button className="size-btn" onClick={() => this.setState({ ukuran: "43" })}>43</Button>
                             <Button className="size-btn" onClick={() => this.setState({ ukuran: "44" })}>44</Button>
@@ -295,8 +300,8 @@ class Detail extends Component {
                 </Row>
                 <Row className="my-5 review-container">
                     <h4 className="detail-product-sec-text">Review</h4>
-                    {this.state.review.map((e,key) => {
-                        return(
+                    {this.state.review.map((e, key) => {
+                        return (
                             <Card key={key} className="review-card">
                                 <Card.Header className="review-title">{this.getRating(e.rate)}</Card.Header>
                                 <Card.Body>
@@ -305,7 +310,7 @@ class Detail extends Component {
                                         " {e.ulasan} "
                                     </Card.Text>
                                 </Card.Body>
-                            </Card> 
+                            </Card>
                         )
                     })}
                 </Row>

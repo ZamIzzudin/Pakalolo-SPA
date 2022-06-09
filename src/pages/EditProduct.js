@@ -5,8 +5,8 @@ import axios from 'axios'
 
 const recieveState = (state) => {
     return {
-        currentItem : state.currentItem,
-        url : state.url
+        currentItem: state.currentItem,
+        url: state.url
     }
 }
 
@@ -24,36 +24,36 @@ class EditProduct extends Component {
         super(props);
         this.state = {
             dataProduct: [],
-            dataCategory : [],
-            stok : 0,
-            alert : false
+            dataCategory: [],
+            stok: 0,
+            alert: false
         }
     }
 
     getDataProduct = async () => {
         const url = this.props.url + "storage/" + this.props.currentItem
-        try{
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
                         dataProduct: res.data.data[0]
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
 
     getDataCategory = async () => {
         const url = this.props.url + "kategori"
-        try{
+        try {
             await axios.get(url)
                 .then(res => {
                     this.setState({
                         dataCategory: res.data.data
                     })
                 })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -61,12 +61,12 @@ class EditProduct extends Component {
     updateData = async () => {
         const data = this.state.dataProduct
         const url = this.props.url + "storage/" + this.props.currentItem
-        try{
+        try {
             await axios.put(url, data)
-            .then(res=>{
-                this.props.history.push('/manageproduct')
-            })
-        }catch(err){
+                .then(res => {
+                    this.props.history.push('/manageproduct')
+                })
+        } catch (err) {
             console.log(err.message)
         }
     }
@@ -75,11 +75,11 @@ class EditProduct extends Component {
         const stok = this.state.stok
         const url = this.props.url + "storage/" + this.props.currentItem
         console.log(stok)
-        if(stok === 0){
-           this.setState({
-                alert : true
-            }) 
-        }else{
+        if (stok === 0) {
+            this.setState({
+                alert: true
+            })
+        } else {
             try {
                 await axios.post(url, { stok: stok })
                     .then(res => {
@@ -87,10 +87,10 @@ class EditProduct extends Component {
                     })
             } catch (err) {
                 console.log(err.message)
-            }    
+            }
         }
     }
-    
+
     componentDidMount = async () => {
         await this.getDataCategory();
         await this.getDataProduct();
@@ -98,7 +98,7 @@ class EditProduct extends Component {
 
     render() {
         return (
-            <Container className="pt-5 centered"> 
+            <Container className="pt-5 centered">
                 <Row className="mb-4 page-info">
                     <h1 className="prim-text">Edit Product</h1>
                     <h2 className="sec-text black">Home . Pages . <span>Edit Product</span></h2>
@@ -132,7 +132,7 @@ class EditProduct extends Component {
                                     <Form.Group>
                                         <Form.Label>Kategori</Form.Label>
                                         <Form.Select onChange={(e) => this.setState(prevState => ({ dataProduct: { ...prevState.dataProduct, kategori: e.target.value } }))}>
-                                            {this.state.dataCategory?.map((e, key) => {
+                                            {this.state.dataCategory.map((e, key) => {
                                                 return (
                                                     <option defaultValue={e} key={key}>{e}</option>
                                                 )
@@ -167,10 +167,10 @@ class EditProduct extends Component {
                                 </Col>
                                 <Col className="centered-row">
                                     <Button className="login-btn" onClick={this.updateStock}>Add</Button>
-                                </Col>    
+                                </Col>
                             </div>
-                            
-                                     
+
+
                         </Row>
                     </Col>
                 </Row>

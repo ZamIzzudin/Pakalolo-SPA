@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Button, Col, Row , Image, Form, Alert} from 'react-bootstrap'
+import { Container, Button, Col, Row, Image, Form, Alert } from 'react-bootstrap'
 import axios from 'axios'
 
 const recieveState = (state) => {
     return {
         id_user: state.id_user,
-        wishlistData : state.buyFromWishlist,
+        wishlistData: state.buyFromWishlist,
         currentItem: state.currentItem,
-        quantity : state.quantity,
-        order_from : state.order_from,
-        ukuran : state.size,
-        url : state.url
+        quantity: state.quantity,
+        order_from: state.order_from,
+        ukuran: state.size,
+        url: state.url
     }
 }
 
 const dispacthAction = (dispatch) => {
     return {
-       
+
     }
 }
 
@@ -25,47 +25,47 @@ class Order extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data : this.props.wishlistData,
-            nama_pengirim : null,
-            alamat : null,
-            data_jasa_pengiriman : [],
-            id_pengiriman : 1,
-            via_pembayaran : null,
-            no_telp : null,
-            catatan_pembeli : null,
-            alert : false
+            data: this.props.wishlistData,
+            nama_pengirim: null,
+            alamat: null,
+            data_jasa_pengiriman: [],
+            id_pengiriman: 1,
+            via_pembayaran: null,
+            no_telp: null,
+            catatan_pembeli: null,
+            alert: false
         }
     }
 
     sendForm = async () => {
         let url = ""
-        if(this.props.order_from === "wishlist"){
-            url = this.props.url + "wishlist/" + this.state.data.id    
-        }else{
+        if (this.props.order_from === "wishlist") {
+            url = this.props.url + "wishlist/" + this.state.data.id
+        } else {
             url = this.props.url + "sale/" + this.state.data.id
         }
-    
+
         const data = {
-            "id_user" : this.props.id_user,
-            "id_pengiriman" : this.state.id_pengiriman,
-            "alamat" : this.state.alamat,
-            "nama_pembeli" : this.state.nama_pengirim,
-            "via_pembayaran" : this.state.via_pembayaran,
+            "id_user": this.props.id_user,
+            "id_pengiriman": this.state.id_pengiriman,
+            "alamat": this.state.alamat,
+            "nama_pembeli": this.state.nama_pengirim,
+            "via_pembayaran": this.state.via_pembayaran,
             "jumlah": this.state.data.jumlah === undefined ? this.props.quantity : this.state.data.jumlah,
             "ukuran": this.state.data.ukuran === undefined ? this.props.ukuran : this.state.data.ukuran,
-            "catatan_pembeli" : this.state.catatan_pembeli,
-            "no_telp" : this.state.no_telp
+            "catatan_pembeli": this.state.catatan_pembeli,
+            "no_telp": this.state.no_telp
         }
-        if(data.nama_pembeli !== null && data.alamat !== null && data.no_telp !== null){
-             try{
+        if (data.nama_pembeli !== null && data.alamat !== null && data.no_telp !== null) {
+            try {
                 await axios.post(url, data)
-                .then(res=>{
-                    this.props.history.push('/transaction')
-                })
-            }catch(err){
+                    .then(res => {
+                        this.props.history.push('/transaction')
+                    })
+            } catch (err) {
                 console.log(err.message)
-            }    
-        }else{
+            }
+        } else {
             this.setState({
                 alert: true
             })
@@ -74,32 +74,32 @@ class Order extends Component {
 
     getPengiriman = async () => {
         const url = this.props.url + "pengiriman"
-        try{
+        try {
             await axios.get(url)
-            .then(res => {
-                this.setState({
-                    data_jasa_pengiriman : res.data.data
+                .then(res => {
+                    this.setState({
+                        data_jasa_pengiriman: res.data.data
+                    })
                 })
-            })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
     }
 
     getDataOrder = async () => {
-        if(this.state.data.length === 0 || this.props.order_from === "straith"){
-            try{
-                const url = this.props.url + "sale/" + this.props.currentItem
-                await axios.put(url)
-                .then(res => {
-                    this.setState({
-                        data : res.data.data,
-                    })  
-                })
-            }catch(err){
+        if (this.state.data.length === 0 || this.props.order_from === "straith") {
+            try {
+                const url = this.props.url + "storage/" + this.props.currentItem
+                await axios.get(url)
+                    .then(res => {
+                        this.setState({
+                            data: res.data.data[0],
+                        })
+                    })
+            } catch (err) {
 
             }
-        }else{
+        } else {
             this.setState({
                 data: this.props.wishlistData
             })
@@ -111,8 +111,8 @@ class Order extends Component {
         await this.getDataOrder();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <Container className="pt-5 centered">
                 <Row className="mb-4 page-info">
                     <h1 className="prim-text">Order Product</h1>
@@ -176,7 +176,7 @@ class Order extends Component {
                                         <Form.Control type="text" onChange={(e) => { this.setState({ catatan_pembeli: e.target.value }) }} />
                                     </Form.Group>
                                 </Col>
-                            </Row>   
+                            </Row>
                             <Button className="login-btn" onClick={this.sendForm}>Send</Button>
                         </Form>
                     </Col>
