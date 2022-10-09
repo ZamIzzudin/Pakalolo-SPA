@@ -55,6 +55,7 @@ class Home extends Component {
                     this.setState({
                         banner: res.data.data
                     })
+                    console.log(res)
                 })
         } catch (err) {
             console.log(err.message)
